@@ -7,7 +7,7 @@ import styles from "./MealTypes.module.css";
 
  const MealTypes =  () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [mealTypes, setMealTypes] = useState<any[] | null>(null);
+    const [mealTypes, setMealTypes] = useState<string[] | null>(null);
 
     async function getMealTypes() {
         const data = await fetchAllMealTypes();
@@ -23,7 +23,7 @@ import styles from "./MealTypes.module.css";
     return (
         <section className={styles.section}>
             <h2 className='mb-1 text-indigo-500 uppercase'>Meal Types</h2>
-            <Categories categories={mealTypes} />
+            <Categories categories={mealTypes} type={"meal-type"} />
         </section>
     )
 }

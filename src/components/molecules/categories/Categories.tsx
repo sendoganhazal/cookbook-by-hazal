@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { Carousel } from 'primereact/carousel';
-import CarouselItem from '@/components/atoms/categories/CarouselItem';
+import { Carousel} from 'primereact/carousel';
+import Link from 'next/link';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Categories(categories:any) {
+type CategoriesProps = {
+  categories: any | null;   // istersen buraya daha net bir type yazabilirsin
+  type: string;
+};
+
+export default function Categories({ categories, type }: CategoriesProps) {
     const responsiveOptions = [
         {
             breakpoint: '1400px',
@@ -26,10 +31,16 @@ export default function Categories(categories:any) {
             numScroll: 1
         }
     ];
-      console.log("meal", categories)
+    const CarouselItem = (item:string) => {
+  return (
+    <div className="border-1 border-indigo-100 border-round m-2 text-center py-5 px-3">
+      <Link href={type === "meal-type" ? `/recipes/meal-type/${item.toLowerCase()}` : `/recipes/${type}/${item}`}  className="mb-1 text-blue-800 font-semibold uppercase">{item}</Link>
+    </div>
+  )
+}
     return (
         <section>
-            <Carousel value={categories.categories} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={CarouselItem} />
+            <Carousel value={categories} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={CarouselItem} />
         </section>
     )
 }
