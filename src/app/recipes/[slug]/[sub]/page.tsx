@@ -1,5 +1,5 @@
 import RecipesContentWrapper from '@/components/organisms/recipes/RecipesContentWrapper'
-import React from 'react'
+
 
 function page() {
   return (

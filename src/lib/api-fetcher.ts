@@ -7,7 +7,7 @@ export async function fetchAllRecipes() {
     const res = await fetch(url);
     if (res.ok) {
       const data: RecipeResponse = await res.json();
-      return data;
+      return data.recipes;
     } else {
       console.error("Error", res.status);
       return { error: true, status: res.status };
@@ -27,7 +27,7 @@ export async function fetchAllMealTypes() {
 
   const meal_type: string[] = [
     ...new Set(
-      response.recipes.flatMap((recipe: Recipe) => recipe.mealType ?? [])
+      response.flatMap((recipe: Recipe) => recipe.mealType ?? [])
     ),
   ];
   return meal_type;
