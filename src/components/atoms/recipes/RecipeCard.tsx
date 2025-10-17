@@ -23,7 +23,7 @@ const RecipeCard = ({ item }: RecipeProps) => {
       </div>
       <div className="flex flex-column align-items-center gap-3 py-5">
         <Image alt='alt' width={100} height={100} src={item.image} />
-        <Link href={"#"} className="text-2xl font-bold">{item.name}</Link>
+        <Link href={`/recipe/${item.id}`} className="text-2xl font-bold">{item.name}</Link>
         <Rating value={item.rating} readOnly cancel={false}></Rating>
       </div>
     </div>
