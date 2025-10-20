@@ -1,4 +1,5 @@
 const BASE_URL = "https://dummyjson.com/recipes";
+import { ParamValue } from "next/dist/server/request/params";
 import { RecipeResponse, Recipe } from "./types";
 export async function fetchAllRecipes() {
   const url = `${BASE_URL}?limit=0`;
@@ -8,6 +9,23 @@ export async function fetchAllRecipes() {
     if (res.ok) {
       const data: RecipeResponse = await res.json();
       return data.recipes;
+    } else {
+      console.error("Error", res.status);
+      return { error: true, status: res.status };
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { error: true, status: 500 };
+  }
+}
+export async function fetchSingleRecipe(id:ParamValue) {
+  const url = `${BASE_URL}/${id}`;
+
+  try {
+    const res = await fetch(url);
+    if (res.ok) {
+      const data = await res.json();
+      return data;
     } else {
       console.error("Error", res.status);
       return { error: true, status: res.status };
