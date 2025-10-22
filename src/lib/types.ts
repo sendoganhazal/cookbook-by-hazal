@@ -2,7 +2,7 @@ export interface Recipe {
   id: number;
   name: string;
   mealType?: string[]; // array olduğu için string[]
-  instructions?: string;
+  instructions?: string[];
   ingredients: string[];
   prepTimeMinutes: number;
   cookTimeMinutes: number;
